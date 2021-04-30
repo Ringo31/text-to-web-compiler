@@ -23,13 +23,17 @@ int main()
     char c = fgetc(source); // lecture du caractere suivant du fichier source.
     while (token != FIN) // tant que la fin du fichier n'est pas atteinte
     {
-        scanner(source, &c);
+        scanner(source, &c, tokenValue);
         if (token == MOTCLE_T) printf("Titre\n");
         if (token == MOTCLE_A) printf("Auteur\n");
         if (token == SECTION) printf("Section\n");
         if (token == SSECTION) printf("Sous-section\n");
         if (token == NOUV_PARA) printf("Nouveau paragraphe\n");
-        if (token == MOT) printf("Mot\n");
+        if (token == MOT)
+        {
+            printf("Mot : ");
+            printf("%s\n", tokenValue);
+        }
     }
     if (source != NULL) fclose(source); // fermeture du fichier source
     

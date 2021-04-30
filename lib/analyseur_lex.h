@@ -9,5 +9,5 @@ char tokenValue[50];
 
 int est_caractere(char lettre);
 // int scanner(FILE* source, char c);
-int scanner(FILE* source, char * c);
+int scanner(FILE* source, char* c, char* mot);
 

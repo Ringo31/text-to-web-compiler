@@ -7,10 +7,10 @@
 int est_caractere(char lettre)
 {
     if (
-        (lettre >= 97 && lettre <= 122) // [a-z]
-    || (lettre >= 65 && lettre <= 90) // [A-Z]
-    || (lettre >= 48 && lettre <= 57) // [0-9]
-    || (lettre == 44 ||lettre == 45 || lettre == 46 || lettre == 33 || lettre == 63 || lettre == 58 || lettre == 59 || lettre == 39 || lettre == 35) // ',' + '-' + '.' + '!' + '?' + ':' + ';'
+        (lettre >= 'a' && lettre <= 'z')
+    || (lettre >= 'A' && lettre <= 'Z')
+    || (lettre >= '0' && lettre <= '9')
+    || (lettre == ',' ||lettre == '-' || lettre == '.' || lettre == '!' || lettre == '?' || lettre == ':' || lettre == ';' || lettre == '\'' || lettre == '#')
     )
     {
         return 1;
@@ -23,8 +23,9 @@ int est_caractere(char lettre)
 }
 
 
-int scanner(FILE* source, char* c)
+int scanner(FILE* source, char* c, char* mot)
 {
+    int i_mot = 0;
     goto initial;
 
     initial:
@@ -46,6 +47,8 @@ int scanner(FILE* source, char* c)
         }
         if (est_caractere(*c))
         {
+            mot[i_mot] = *c;
+            i_mot++;
             *c = fgetc(source);
             goto m1;
         }
@@ -76,6 +79,8 @@ int scanner(FILE* source, char* c)
         }
         if (est_caractere(*c))
         {
+            mot[i_mot] = *c;
+            i_mot++;
             *c = fgetc(source);
             goto m1;
         }
@@ -125,6 +130,8 @@ int scanner(FILE* source, char* c)
         }
         if (est_caractere(*c))
         {
+            mot[i_mot] = *c;
+            i_mot++;
             *c = fgetc(source);
             goto m1;
         }
@@ -179,6 +186,7 @@ int scanner(FILE* source, char* c)
         return 1;
 
     mot: 
+        tokenValue[i_mot] = '\0';
         token = MOT;
         return 1;
     
