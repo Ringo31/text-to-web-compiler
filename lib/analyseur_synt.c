@@ -122,5 +122,25 @@ void analyse_S1(FILE * source, char * c)
     }
 }
 
+void analyse_H1(FILE * source, char * c)
+{
+    // Si token dans possibles(H1 -> SECTION Text)
+    if(token == SECTION)
+    {
+        if(token == SECTION) scanner(source, c, tokenValue);
+        else
+        {
+            printf("Erreur analyse H1.\n");
+            exit(-1);
+        }
+        analyse_TEXT(source, c);
+    }
+    else
+    {
+        printf("Erreur analyse H1\n");
+        exit(-1);
+    }
+}
+
 
 
