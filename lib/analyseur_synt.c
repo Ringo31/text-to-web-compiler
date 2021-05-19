@@ -59,7 +59,7 @@ void analyse_TEXT(FILE * source, char * c)
     }
 }
 
-void analyse_BODY(FILE * soucre, char * c)
+void analyse_BODY(FILE * source, char * c)
 {
     // Si token dans possibles(BODY -> P S1)
     if(token == NOUV_PARA || token == SECTION || token == FIN)
@@ -70,6 +70,32 @@ void analyse_BODY(FILE * soucre, char * c)
     else
     {
         printf("Erreur analyse BODY.\n");
+        exit(-1);
+    }
+}
+
+void analyse_P(FILE * source, char * c)
+{
+    // Si token dans possibles(P -> NOUV_PARA Text P)
+    if(token == NOUV_PARA)
+    {
+        if(token == NOUV_PARA) scanner(source, c, tokenValue);
+        else
+        {
+            printf("Erreur analyse P.\n");
+            exit(-1);
+        }
+        analyse_TEXT(source, c);
+        analyse_P(source, c);
+    }
+    // Sinon si token dans possibles(P -> epsilon)
+    else if(token == SECTION || token == SSECTION || token == FIN)
+    {
+        // Rien à faire
+    }
+    else
+    {
+        printf("Erreur analyse P.\n");
         exit(-1);
     }
 }
