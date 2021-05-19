@@ -142,5 +142,24 @@ void analyse_H1(FILE * source, char * c)
     }
 }
 
-
+void analyse_S2(FILE * source, char * c)
+{
+    // Si token dans possibles(S2 -> H2 P S2)
+    if(token == SSECTION)
+    {
+        analyse_H2(source, c);
+        analyse_P(source, c);
+        analyse_S2(source, c);
+    }
+    // Sinon si token dans possibles(S2 -> epsilon)
+    else if(token == SECTION || token == FIN)
+    {
+        // Rien à faire
+    }
+    else
+    {
+        printf("Erreur analyse S2");
+        exit(-1);
+    }
+}
 
