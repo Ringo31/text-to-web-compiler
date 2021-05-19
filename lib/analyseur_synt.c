@@ -5,8 +5,9 @@
 #include <stdlib.h>
 
 
-void analyse_AXIOME(FILE * soucre, char * c)
+void analyse_AXIOME(FILE * source, char * c)
 {
+    scanner(source, c, tokenValue);
     // Si token dans possibles(Axiome -> Head Body FIN)
     if(token == MOTCLE_T || token == MOTCLE_A)
     {
@@ -21,7 +22,7 @@ void analyse_AXIOME(FILE * soucre, char * c)
     }
     else
     {
-        printf("Erreur analyse Axiome.\n")
+        printf("Erreur analyse Axiome.\n");
     }
 }
 
@@ -86,7 +87,7 @@ void analyse_BODY(FILE * source, char * c)
     if(token == NOUV_PARA || token == SECTION || token == FIN)
     {
         analyse_P(source, c);
-        ananlyse_S1(source, c);
+        analyse_S1(source, c);
     }
     else
     {
