@@ -4,6 +4,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+void analyse_AXIOME(FILE * soucre, char * c)
+{
+    // Si token dans possibles(Axiome -> Head Body FIN)
+    if(token == MOTCLE_T || token == MOTCLE_A)
+    {
+        analyse_HEAD(source, c);
+        analyse_BODY(source, c);
+        if(token == FIN) printf("Ca marche !\n");
+        else
+        {
+            printf("Erreur analyse Axiome.\n");
+            exit(-1);
+        }
+    }
+    else
+    {
+        printf("Erreur analyse Axiome.\n")
+    }
+}
+
 void analyse_HEAD(FILE * source, char * c)
 {
     // Si token app aux possibles de la règle (head donne mot_cle_T text  mot_cle A text)
