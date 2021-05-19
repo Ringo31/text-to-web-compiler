@@ -6,48 +6,35 @@
 
 void analyse_HEAD(FILE * source, char * c)
 {
-    if (token == MOTCLE_T)
+    // Si token app aux possibles de la règle (head donne mot_cle_T text  mot_cle A text)
+    if ()
     {
-        scanner(source, c, tokenValue);
+        if (token == MOTCLE_T) scanner(source, c, tokenValue);
+        else exit(-1);
         analyse_TEXT(source, c);
+        if (token == MOTCLE_A) scanner(source, c, tokenValue);
+        else exit(-1);
+        analyse_TEXT(source, c);
+    }
+    else exit(-1);
 
-        if(token == MOTCLE_A)
-        {
-            scanner(source, c, tokenValue);
-            analyse_TEXT(source, c);
-        }
-
-        else
-        {
-            printf("Erreur dans l'analyse de HEAD\n");
-            exit(-1);   
-        }
-    }
-    else if (token == NOUV_PARA || token == SECTION || token == FIN)
-    {
-        // Rien à faire
-    }
-    else
-    {
-        printf("Erreur dans l'analyse de HEAD\n");
-        exit(-1); 
-    }
 }
+
 
 void analyse_TEXT(FILE * source, char * c)
 {
-    if (token == MOT)
+    // Si token dans possibles de (text donne mot text)
+    if(token == MOT)
     {
-        scanner(source, c, tokenValue);
-        analyse_TEXT(source, c);
+        if(token == MOT) scanner(source, c, tokenValue);
+        else exit(-1);
+        analyse_TEXT();
     }
-    else if (token == MOTCLE_A || token == MOTCLE_T || token == NOUV_PARA || token == SECTION || token == SSECTION || token == FIN)
+    // Sinon si token dans possibles (text donne epsilon)
+    else if (token == MOTCLE_T || token == MOTCLE_A || token == NOUV_PARA || token == SECTION || token == SSECTION || token == FIN)
     {
         // Rien à faire
     }
-    else
-    {
-        printf("Erreur dans l'analyse de TEXT\n");
-        exit(-1);
-    }
+    else exit(-1);
 }
+
